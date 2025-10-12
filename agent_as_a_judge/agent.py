@@ -39,8 +39,11 @@ logging.basicConfig(
 
 class JudgeAgent:
     """
-    This proof-of-concept shows how Agent-as-a-Judge can evaluate the workspace
-    and behaviour of other developer agents.
+    Agent-as-a-Judge: An automated evaluation system for developer agents.
+    
+    This class provides comprehensive evaluation capabilities for AI development
+    agents, including workspace analysis, requirement validation, and performance
+    assessment with detailed feedback generation.
     """
 
     def __init__(
