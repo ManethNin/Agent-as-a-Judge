@@ -72,10 +72,16 @@ class DevCodeSearch:
         return self.spacy_nlp
 
     def load_graph(self) -> nx.MultiDiGraph:
-
+        """Load graph with improved error handling and validation."""
         try:
             with open(self.graph_file, "rb") as f:
-                return pickle.load(f)
+                graph = pickle.load(f)
+                # Validate graph structure
+                if not isinstance(graph, nx.MultiDiGraph):
+                    logging.warning("Loaded graph is not a MultiDiGraph, creating new one")
+                    return nx.MultiDiGraph()
+                logging.info(f"Successfully loaded graph with {graph.number_of_nodes()} nodes")
+                return graph
         except (FileNotFoundError, EOFError) as e:
             logging.warning(f"Failed to load graph: {e}")
             return nx.MultiDiGraph()
