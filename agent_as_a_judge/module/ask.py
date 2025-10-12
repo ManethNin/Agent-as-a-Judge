@@ -28,6 +28,8 @@ class DevAsk:
         self.workspace = workspace
         self.judge_dir = judge_dir
         self.llm = self._initialize_llm()
+        # Cache for prompt templates to improve performance
+        self._prompt_cache = {}
 
     def _initialize_llm(self) -> LLM:
         try:
