@@ -5,6 +5,7 @@ from pathlib import Path
 
 @dataclass
 class AgentConfig:
+    """Configuration class for Agent-as-a-Judge evaluation settings."""
     include_dirs: Optional[List[str]] = None
     exclude_dirs: Optional[List[str]] = None
     exclude_files: Optional[List[str]] = None
@@ -14,6 +15,9 @@ class AgentConfig:
     workspace_dir: Optional[Path] = None
     instance_dir: Optional[Path] = None
     trajectory_file: Optional[Path] = None
+    # New configuration options for improved functionality
+    max_file_size_mb: int = 10  # Maximum file size to process (MB)
+    enable_caching: bool = True  # Enable result caching for performance
 
     @classmethod
     def from_args(cls, args):
