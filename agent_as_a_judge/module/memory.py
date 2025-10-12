@@ -10,9 +10,10 @@ from pathlib import Path
 
 class Memory:
     def __init__(self, memory_file: Path = None):
-
+        """Initialize Memory with optional file path and validation."""
         self.judgments = []
         self.memory_file = memory_file
+        self._validate_memory_file()
 
     def save_to_file(self):
         if not self.memory_file:
@@ -85,3 +86,14 @@ class Memory:
         )
 
         return output
+    
+    def _validate_memory_file(self):
+        """Validate memory file path and create directory if needed."""
+        if self.memory_file and not self.memory_file.parent.exists():
+            self.memory_file.parent.mkdir(parents=True, exist_ok=True)
+            logging.info(f"Created directory for memory file: {self.memory_file.parent}")
+    
+    def clear_judgments(self):
+        """Clear all stored judgments."""
+        self.judgments.clear()
+        logging.info("Cleared all judgments from memory.")
