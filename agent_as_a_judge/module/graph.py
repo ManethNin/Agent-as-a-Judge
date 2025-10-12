@@ -49,8 +49,14 @@ class DevGraph:
         self.verbose = verbose
         self.root = root or os.getcwd()
         self.include_dirs = include_dirs
-        self.exclude_dirs = exclude_dirs or ["__pycache__", "env", "venv"]
-        self.exclude_files = exclude_files or [".DS_Store"]
+        # Enhanced exclude patterns for better performance
+        self.exclude_dirs = exclude_dirs or [
+            "__pycache__", "env", "venv", "node_modules", 
+            ".git", "dist", "build", ".pytest_cache"
+        ]
+        self.exclude_files = exclude_files or [
+            ".DS_Store", "*.pyc", "*.pyo", "*.log", ".env"
+        ]
         self.structure = self.create_structure(self.root)
         self.warned_files = set()
         self.tree_cache = {}
@@ -792,7 +798,8 @@ class DevGraph:
                     lois = None
                 elif cur_fname:
                     output += "\n" + cur_fname + "\n"
-                if identifier(tag) is Tag:
+                # Fix: Check if tag is a Tag instance properly
+                if isinstance(tag, Tag):
                     lois = []
                     cur_abs_fname = tag.fname
                 cur_fname = this_rel_fname
