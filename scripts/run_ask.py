@@ -14,9 +14,14 @@ from agent_as_a_judge.agent import JudgeAgent
 from agent_as_a_judge.config import AgentConfig
 
 logging.basicConfig(
-    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+    level=logging.INFO, 
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S"  # Added timestamp formatting
 )
 console = Console()
+
+# Performance tracking for questions
+question_count = 0
 
 
 def main(agent_config: AgentConfig, initial_question: str, logger: logging.Logger):
