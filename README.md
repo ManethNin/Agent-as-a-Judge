@@ -53,14 +53,18 @@ poetry install
 
 ### 2. set LLM&API
 
-Before running, rename `.env.sample` to `.env` and fill in the **required APIs and Settings** in the main repo folder to support LLM calling. The `LiteLLM` tool supports various LLMs.
+Before running, rename `.env.sample` to `.env` and fill in the **required APIs and Settings** in the main repo folder to support LLM calling. The `LiteLLM` tool supports various LLMs including OpenAI, Anthropic, and others.
 
 ```bash
 cp .env.sample .env
-# and then set the .env, please change accordingly, for example: 
-# OPENAI_API_KEY="sk-***"
+# Configure your environment variables:
+# OPENAI_API_KEY="sk-***"           # For OpenAI models
+# ANTHROPIC_API_KEY="your-key"      # For Claude models  
+# DEFAULT_LLM="gpt-4"               # Set your preferred model
 # ...
 ```
+
+> **Note**: Make sure to set appropriate rate limits and monitoring for API usage to control costs during evaluation.
 
 ### 3. run 
 
